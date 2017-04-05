@@ -1,0 +1,29 @@
+{
+  "name": "conference-scraper",
+  "version": "1.0.0",
+  "description": "Grabs LDS General Conference talks and adds them to your Google Calendar",
+  "main": "scrape.js",
+  "dependencies": {
+    "cheerio": "^0.22.0",
+    "googleapis": "^18.0.0",
+    "moment": "^2.18.1",
+    "request": "^2.76.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node scrape.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curtisgibby/conference-scraper.git"
+  },
+  "keywords": [
+    "byutv"
+  ],
+  "author": "Curtis Gibby",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/curtisgibby/conference-scraper/issues"
+  },
+  "homepage": "https://github.com/curtisgibby/conference-scraper#readme"
+}
