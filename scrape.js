@@ -80,7 +80,7 @@ function gotHTML(err, resp, html, auth) {
   // console.log("talks : ", talks); //debug!
 
   // Midnight, Sunday of the first week that we should put talks onto
-  var startDate = moment(now, 'YYYY-MM-DD 00:00:00').isoWeekday('Sunday').hours(0).minutes(0).seconds(0);
+  var startDate = moment(now, 'YYYY-MM-DD').isoWeekday('Sunday').hours(0).minutes(0).seconds(0);
   var firstDayOfNextAprilOrOctober = now.add(6, 'months').startOf('month') // date of next Conference
   var endDate = firstDayOfNextAprilOrOctober.day() % 6 === 0 ? firstDayOfNextAprilOrOctober : firstDayOfNextAprilOrOctober.add(1, 'week').day(0);
 
