@@ -68,7 +68,7 @@ function gotHTML(err, resp, html, auth) {
     var title = $(link).find('.lumen-tile__title').text().replace(/\s\s+/g, ' ').trim();
     var author = $(link).find('.lumen-tile__content').text().replace(/\s\s+/g, ' ').trim();
     if (author == 'Video Presentation' ||
-      title.indexOf('Sustaining of Church Officers') > -1 ||
+      title.indexOf('Sustaining of ') > -1 ||
       title.indexOf('Statistical Report') > -1 ||
       title.indexOf('Auditing Department') > -1
     ) {
