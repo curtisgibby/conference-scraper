@@ -134,6 +134,9 @@ function saveTalk(talk, startDatetime, endDatetime, auth) {
   }, function (err, success) {
       if (err) {
           console.error('Error adding %s at %s', talk, startDatetime, err);
+          if (err.reason === 'rateLimitExceeded') {
+            saveTalk(talk, startDatetime, endDatetime, auth);
+          }
       } else {
           console.log('Successfully added %s at %s', talk, startDatetime);
       }
