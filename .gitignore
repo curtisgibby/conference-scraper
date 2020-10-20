@@ -33,4 +33,5 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-client_secret.json
+credentials.json
+token.json
