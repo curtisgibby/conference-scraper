@@ -5,7 +5,7 @@ var $ = require('cheerio')
 var moment = require('moment');
 var request = require('request')
 var now = moment();
-// var now = moment('2020-10-10'); // manually set to a date in April or October if needed
+// var now = moment('2021-04-01'); // manually set to a date in April or October if needed
 var year = now.format('YYYY');
 var month = now.format('MM');
 
@@ -74,7 +74,7 @@ function getAccessToken(oAuth2Client, callback) {
 }
 
 function scrape(auth) {
-  request('https://www.lds.org/general-conference/' + year + '/' + month + '?lang=eng', function(err, response, body) {
+  request('https://www.churchofjesuschrist.org/general-conference/' + year + '/' + month + '?lang=eng', function(err, response, body) {
       gotHTML(err,response, body, auth);
   });
 }
@@ -82,11 +82,10 @@ function scrape(auth) {
 function gotHTML(err, resp, html, auth) {
   if (err) return console.error(err)
   var $html = $.load(html)
-  // get all img tags and loop over them
   talks = []
-  $html('a.lumen-tile__link').map(function(i, link) {
-    var title = $(link).find('.lumen-tile__title').text().replace(/\s\s+/g, ' ').trim();
-    var author = $(link).find('.lumen-tile__content').text().replace(/\s\s+/g, ' ').trim();
+  $html('.subItems-2yUxK .open-2riJ3 a.item-3cCP7').map(function(i, link) {
+    var title = $(link).find('span').text().replace(/\s\s+/g, ' ').trim();
+    var author = $(link).find('.subtitle-MuO4X').text().replace(/\s\s+/g, ' ').trim();
     if (author == 'Video Presentation' ||
       title.indexOf('Sustaining of ') > -1 ||
       title.indexOf('Statistical Report') > -1 ||
@@ -97,7 +96,7 @@ function gotHTML(err, resp, html, auth) {
     talks.push(title + ' - ' + author);
   })
 
-  // console.log("talks : ", talks); //debug!
+  // console.log("talks : ", talks); // debug!
 
   // Midnight, Sunday of the first week that we should put talks onto
   var startDate = moment(now, 'YYYY-MM-DD').isoWeekday('Sunday').hours(0).minutes(0).seconds(0);
@@ -135,6 +134,7 @@ function gotHTML(err, resp, html, auth) {
 
 function saveTalk(talk, startDatetime, endDatetime, auth) {
   // console.log('saveTalk :', talk, startDatetime); // debug!
+  // return false; // debug!
   var calendar = google.calendar('v3');
   calendar.events.insert({
       auth: auth,
