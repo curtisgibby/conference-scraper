@@ -4,8 +4,8 @@ const {google} = require('googleapis');
 var $ = require('cheerio')
 var moment = require('moment');
 var request = require('request')
-var now = moment();
-// var now = moment('2021-04-01'); // manually set to a date in April or October if needed
+// var now = moment();
+var now = moment('2022-04-01'); // manually set to a date in April or October if needed
 var year = now.format('YYYY');
 var month = now.format('MM');
 
@@ -83,10 +83,11 @@ function gotHTML(err, resp, html, auth) {
   if (err) return console.error(err)
   var $html = $.load(html)
   talks = []
-  $html('.subItems-2yUxK .open-2riJ3 a.item-3cCP7').map(function(i, link) {
+  $html('.subItems-iyPWM.open-C1MIf a.item-U_5Ca').map(function(i, link) {
     var title = $(link).find('span').text().replace(/\s\s+/g, ' ').trim();
-    var author = $(link).find('.subtitle-MuO4X').text().replace(/\s\s+/g, ' ').trim();
+    var author = $(link).find('.subtitle-LKtQp').text().replace(/\s\s+/g, ' ').trim();
     if (author == 'Video Presentation' ||
+      title.indexOf('Contents') > -1 ||
       title.indexOf('Sustaining of ') > -1 ||
       title.indexOf('Statistical Report') > -1 ||
       title.indexOf('Auditing Department') > -1
@@ -95,8 +96,6 @@ function gotHTML(err, resp, html, auth) {
     }
     talks.push(title + ' - ' + author);
   })
-
-  // console.log("talks : ", talks); // debug!
 
   // Midnight, Sunday of the first week that we should put talks onto
   var startDate = moment(now, 'YYYY-MM-DD').isoWeekday('Sunday').hours(0).minutes(0).seconds(0);
@@ -117,7 +116,7 @@ function gotHTML(err, resp, html, auth) {
     if (typeof talk == 'undefined') {
       break;
     }
-    var c = moment(startDate, 'YYYY-MM-DD').add(weekCount, 'weeks').add(2, 'days').add(7, 'hours'); // Tuesday!
+    var c = moment(startDate, 'YYYY-MM-DD').add(weekCount, 'weeks').add(2, 'days').add(8, 'hours'); // Tuesday!
     saveTalk(talk, c.toISOString(), c.add(15, 'minutes').toISOString(), auth);
 
     if ((weekCount % div) == 0) {
@@ -126,7 +125,7 @@ function gotHTML(err, resp, html, auth) {
       if (typeof talk == 'undefined') {
         break;
       }
-      var c = moment(startDate, 'YYYY-MM-DD').add(weekCount, 'weeks').add(4, 'days').add(7, 'hours'); // Thursday!
+      var c = moment(startDate, 'YYYY-MM-DD').add(weekCount, 'weeks').add(4, 'days').add(8, 'hours'); // Thursday!
       saveTalk(talk, c.toISOString(), c.add(15, 'minutes').toISOString(), auth);
     }
   }
