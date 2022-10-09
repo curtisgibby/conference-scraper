@@ -3,7 +3,7 @@ const path = require('path');
 const process = require('process');
 const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
-var $ = require('cheerio')
+const cheerio = require('cheerio')
 var moment = require('moment');
 var request = require('request')
 var now = moment();
@@ -81,9 +81,9 @@ function scrape(auth) {
 
 function gotHTML(err, resp, html, auth) {
 	if (err) return console.error(err)
-	var $html = $.load(html)
+	const $ = cheerio.load(html)
 	var talks = []
-	$html('.subItems-iyPWM.open-C1MIf a.item-U_5Ca').map(function(i, link) {
+	$('.subItems-iyPWM.open-C1MIf a.item-U_5Ca').map(function(i, link) {
 		var title = $(link).find('span').text().replace(/\s\s+/g, ' ').trim();
 		var author = $(link).find('.subtitle-LKtQp').text().replace(/\s\s+/g, ' ').trim();
 		if (author == 'Video Presentation' ||
