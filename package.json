@@ -7,7 +7,7 @@
     "@google-cloud/local-auth": "^2.1.0",
     "cheerio": "^0.22.0",
     "googleapis": "^105.0.0",
-    "moment": "^2.18.1",
+    "moment": "^2.29.4",
     "request": "^2.76.0"
   },
   "devDependencies": {},
