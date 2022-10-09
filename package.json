@@ -4,8 +4,9 @@
   "description": "Grabs LDS General Conference talks and adds them to your Google Calendar",
   "main": "scrape.js",
   "dependencies": {
+    "@google-cloud/local-auth": "^2.1.0",
     "cheerio": "^0.22.0",
-    "googleapis": "^59.0.0",
+    "googleapis": "^105.0.0",
     "moment": "^2.18.1",
     "request": "^2.76.0"
   },
