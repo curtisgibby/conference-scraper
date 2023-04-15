@@ -5,6 +5,7 @@
   "main": "scrape.js",
   "dependencies": {
     "@google-cloud/local-auth": "^2.1.0",
+    "ansi-colors": "^4.1.3",
     "cheerio": "^1.0.0-rc.12",
     "googleapis": "^105.0.0",
     "moment": "^2.29.4",
